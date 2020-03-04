@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Movie Time</string>
+    <string name="title_top_movies">Top Movies</string>
+    <string name="title_favourites_moview">Favourites</string>
 </resources>

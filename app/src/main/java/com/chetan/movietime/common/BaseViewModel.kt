@@ -17,7 +17,7 @@ import com.rebel.demo.common.NavigationUtils
  *It implements Observable interface from databinding library
  */
 
-class BaseViewModel(application: Application) : AndroidViewModel(application), Observable {
+open class BaseViewModel(application: Application) : AndroidViewModel(application), Observable {
     val navigationUtils = NavigationUtils()
     var snackBarMessage = MutableLiveData<String>()
 
