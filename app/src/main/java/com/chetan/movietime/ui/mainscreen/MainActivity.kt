@@ -2,6 +2,7 @@ package com.chetan.movietime.ui.mainscreen
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.chetan.movietime.R
 import com.chetan.movietime.adapters.viewpager.ViewPagerAdapter
@@ -9,6 +10,7 @@ import com.chetan.movietime.common.BaseActivity
 import com.chetan.movietime.databinding.ActivityMainBinding
 import com.chetan.movietime.ui.mainscreen.fragments.FavouriteMoviesFragment
 import com.chetan.movietime.ui.mainscreen.fragments.TopMoviesFragment
+import com.rebel.demo.common.Navigator
 
 class MainActivity : BaseActivity() {
 
@@ -16,7 +18,20 @@ class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
 
     override fun setupLiveDataComponents() {
+        viewModel.navigationUtils.observe(this, Observer<Navigator> { this.resolveNavigation(it) })
 
+        viewModel.isInitialRun().observe(this, Observer {
+
+        })
+
+        viewModel.getMovies().observe(this, Observer {
+            viewModel.submitList(it)
+
+        })
+
+        viewModel.networkStatus().observe(this, Observer {
+
+        })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +47,7 @@ class MainActivity : BaseActivity() {
         binding.lifecycleOwner = this
         setViewPager()
     }
+
 
     private fun setViewPager() {
         binding.tabs.setupWithViewPager(binding.viewPager)

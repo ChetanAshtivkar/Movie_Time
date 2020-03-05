@@ -44,6 +44,7 @@ class TopMoviesFragment : Fragment() {
             ).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")
 
+        binding.movieList.adapter = viewModel.adapter
 
         return binding.root
     }

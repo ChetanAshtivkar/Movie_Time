@@ -17,8 +17,8 @@ class FavouriteMoviesFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
 
     companion object {
-        fun getInstance(bundle: Bundle = Bundle()): TopMoviesFragment {
-            val fragment = TopMoviesFragment()
+        fun getInstance(bundle: Bundle = Bundle()): FavouriteMoviesFragment {
+            val fragment = FavouriteMoviesFragment()
             fragment.arguments = bundle
             return fragment
         }
