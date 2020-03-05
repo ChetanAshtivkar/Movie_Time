@@ -27,6 +27,8 @@ data class Movie(
 
     val adult: Boolean,
 
+    var favourite: Boolean = false,
+
     @SerializedName(value = "backdrop_path")
     val backdropPath: String?,
 

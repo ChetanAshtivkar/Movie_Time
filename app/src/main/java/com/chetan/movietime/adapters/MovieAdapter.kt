@@ -11,7 +11,7 @@ import com.chetan.movietime.databinding.ItemMovieBinding
 /**
  * Created by Chetan on 2020-03-05.
  */
-class MovieAdapter(private val listener: MovieListener) :
+class MovieAdapter(private val listener: MovieClickListener) :
     PagedListAdapter<Movie, MovieAdapter.MovieViewHolder>(MovieDiffCallback()) {
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -25,7 +25,7 @@ class MovieAdapter(private val listener: MovieListener) :
 
     class MovieViewHolder private constructor(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: Movie?, listener: MovieListener, position: Int) {
+        fun bind(item: Movie?, listener: MovieClickListener, position: Int) {
             binding.movie = item
             binding.listener = listener
             binding.position = position
@@ -52,6 +52,12 @@ class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
     }
 }
 
-class MovieListener(val clickListener: (Movie: Movie, position: Int) -> Unit) {
-    fun onClick(Movie: Movie, position: Int) = clickListener(Movie, position)
+//class MovieListener(val clickListener: (Movie: Movie, position: Int) -> Unit) {
+//    fun onClick(Movie: Movie, position: Int) = clickListener(Movie, position)
+//}
+
+interface MovieClickListener {
+    fun onMovieClick(movie: Movie, position: Int)
+
+    fun onFavouriteClick(movie: Movie, position: Int)
 }
