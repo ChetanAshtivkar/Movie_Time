@@ -7,6 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.chetan.movietime.R
 import com.chetan.movietime.adapters.viewpager.ViewPagerAdapter
 import com.chetan.movietime.common.BaseActivity
+import com.chetan.movietime.data.MoviesRepository
+import com.chetan.movietime.data.database.MoviesDatabase
 import com.chetan.movietime.databinding.ActivityMainBinding
 import com.chetan.movietime.ui.mainscreen.fragments.FavouriteMoviesFragment
 import com.chetan.movietime.ui.mainscreen.fragments.TopMoviesFragment
@@ -21,7 +23,7 @@ class MainActivity : BaseActivity() {
         viewModel.navigationUtils.observe(this, Observer<Navigator> { this.resolveNavigation(it) })
 
         viewModel.isInitialRun().observe(this, Observer {
-
+            //This can be used to display progress
         })
 
         viewModel.getMovies().observe(this, Observer {
@@ -30,7 +32,11 @@ class MainActivity : BaseActivity() {
         })
 
         viewModel.networkStatus().observe(this, Observer {
+            //This can be used to display progress
+        })
 
+        viewModel.getFavouriteMovies().observe(this, Observer {
+            viewModel.submitFavouriteMovies(it)
         })
     }
 
@@ -38,16 +44,19 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        val movieDao = MoviesDatabase.getInstance(application)!!.movieDao()
+
         viewModel = ViewModelProvider(
             this,
-            MainViewModelFactory(application)
+            MainViewModelFactory(
+                application, MoviesRepository.getInstance(movieDao)
+            )
         ).get(MainViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
         setViewPager()
     }
-
 
     private fun setViewPager() {
         binding.tabs.setupWithViewPager(binding.viewPager)

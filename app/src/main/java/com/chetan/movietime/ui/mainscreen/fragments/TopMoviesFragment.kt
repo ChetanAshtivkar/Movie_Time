@@ -8,6 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.chetan.movietime.R
+import com.chetan.movietime.data.MoviesRepository
+import com.chetan.movietime.data.database.MoviesDatabase
 import com.chetan.movietime.databinding.FragmentTopMoviesBinding
 import com.chetan.movietime.ui.mainscreen.MainViewModel
 import com.chetan.movietime.ui.mainscreen.MainViewModelFactory
@@ -29,6 +31,7 @@ class TopMoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val movieDao = MoviesDatabase.getInstance(activity!!.application)!!.movieDao()
 
         val binding = DataBindingUtil.inflate<FragmentTopMoviesBinding>(
             inflater, R.layout.fragment_top_movies, container,
@@ -39,7 +42,8 @@ class TopMoviesFragment : Fragment() {
             ViewModelProvider(
                 this,
                 MainViewModelFactory(
-                    activity!!.application
+                    activity!!.application,
+                    MoviesRepository.getInstance(movieDao)
                 )
             ).get(MainViewModel::class.java)
         } ?: throw Exception("Invalid Activity")

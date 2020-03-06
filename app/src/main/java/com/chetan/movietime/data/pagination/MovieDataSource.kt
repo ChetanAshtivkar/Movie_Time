@@ -45,7 +45,6 @@ class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
                     networkState.postValue(NetworkStatus(Status.LOADED))
 
                 } else {
-
                     initialLoading.postValue(NetworkStatus(Status.FAILED, response.message()))
                     networkState.postValue(NetworkStatus(Status.FAILED, response.message()))
 
@@ -82,7 +81,6 @@ class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
                         networkState.postValue(NetworkStatus(Status.LOADED))
 
                     } else {
-
                         initialLoading.postValue(NetworkStatus(Status.FAILED, response.message()))
                         networkState.postValue(NetworkStatus(Status.FAILED, response.message()))
 
@@ -92,7 +90,6 @@ class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
                 override fun onFailure(call: Call<APIResponse>, t: Throwable?) {
                     val errorMessage = if (t == null) "unknown error" else t.message
                     networkState.postValue(NetworkStatus(Status.FAILED, errorMessage))
-
                 }
             })
         }
@@ -100,8 +97,5 @@ class MovieDataSource : PageKeyedDataSource<Int, Movie>() {
     }
 
     override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-
 }

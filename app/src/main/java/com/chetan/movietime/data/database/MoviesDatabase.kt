@@ -18,6 +18,8 @@ private const val DATABASE_NAME = "movie_db"
 )
 abstract class MoviesDatabase : RoomDatabase() {
 
+    abstract fun movieDao(): MoviesDao
+
     companion object {
         private var INSTANCE: MoviesDatabase? = null
 

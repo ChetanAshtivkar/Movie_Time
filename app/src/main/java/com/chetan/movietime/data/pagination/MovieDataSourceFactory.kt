@@ -9,7 +9,7 @@ import com.chetan.movietime.data.Movie
  * Created by Chetan on 2020-03-05.
  */
 
-class MovieDataSourceFactory : DataSource.Factory<Int, Movie>() {
+object MovieDataSourceFactory : DataSource.Factory<Int, Movie>() {
 
     private var mutableLiveData = MutableLiveData<MovieDataSource>()
 

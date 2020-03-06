@@ -51,13 +51,3 @@ class MovieDiffCallback : DiffUtil.ItemCallback<Movie>() {
         return oldItem == newItem
     }
 }
-
-//class MovieListener(val clickListener: (Movie: Movie, position: Int) -> Unit) {
-//    fun onClick(Movie: Movie, position: Int) = clickListener(Movie, position)
-//}
-
-interface MovieClickListener {
-    fun onMovieClick(movie: Movie, position: Int)
-
-    fun onFavouriteClick(movie: Movie, position: Int)
-}

@@ -12,6 +12,6 @@ class MoviesRepositoryTest {
 
     @Test
     fun test() {
-        MoviesRepository().getMovies()
+        MoviesRepository(moviesDao).getMovies()
     }
 }
