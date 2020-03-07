@@ -1,6 +1,7 @@
 package com.chetan.movietime.ui.mainscreen
 
 import android.app.Application
+import android.os.Bundle
 import androidx.paging.PagedList
 import com.chetan.movietime.adapters.FavouriteMoviesAdapter
 import com.chetan.movietime.adapters.MovieAdapter
@@ -8,11 +9,14 @@ import com.chetan.movietime.adapters.MovieClickListener
 import com.chetan.movietime.common.BaseViewModel
 import com.chetan.movietime.data.Movie
 import com.chetan.movietime.data.MoviesRepository
+import com.chetan.movietime.ui.moviedetails.MovieDetailActivity
+import com.rebel.demo.common.Navigator
 
 
 /**
  * Created by Chetan on 2020-03-05.
  */
+const val BUNDLE_MOVIE = "BUNDLE_MOVIE"
 
 class MainViewModel(val app: Application, private val moviesRepository: MoviesRepository) :
     BaseViewModel(app) {
@@ -32,6 +36,16 @@ class MainViewModel(val app: Application, private val moviesRepository: MoviesRe
     private val movieClickListener = object : MovieClickListener {
         override fun onMovieClick(movie: Movie, position: Int) {
 
+            val bundle = Bundle()
+            bundle.putSerializable(BUNDLE_MOVIE, movie)
+
+            navigationUtils.postValue(
+                Navigator(
+                    Navigator.NavigationAction.StartActivity,
+                    MovieDetailActivity::class.java,
+                    bundle
+                )
+            )
         }
 
         override fun onFavouriteClick(movie: Movie, position: Int) {

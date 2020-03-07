@@ -2,6 +2,7 @@ package com.chetan.movietime.common
 
 import android.graphics.Color
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -32,4 +33,9 @@ fun setPicture(imageView: ImageView, imageUrl: String?) {
         .encodeQuality(50)
         .into(object : BitmapImageViewTarget(imageView) {
         })
+}
+
+@BindingAdapter(value = ["vote_average", "vote_count"])
+fun setVotes(textView: TextView, voteAverage: Double, voteCount: Int) {
+    textView.text = "${voteAverage * 10}% ($voteCount votes)"
 }
