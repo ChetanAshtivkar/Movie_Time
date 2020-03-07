@@ -15,101 +15,143 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.moviedetails.MovieDetailActivity">
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/image_backdrop"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintDimensionRatio="16:9"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:set_picture="@{movie.backdropPath}" />
-
-
-        <androidx.constraintlayout.widget.Placeholder
-            android:id="@+id/dummy_backdrop_center"
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            app:layout_constraintBottom_toBottomOf="@id/image_backdrop"
-            app:layout_constraintEnd_toEndOf="@id/image_backdrop"
-            app:layout_constraintStart_toStartOf="@id/image_backdrop"
-            app:layout_constraintTop_toTopOf="@id/image_backdrop" />
-
-        <ImageView
-            android:id="@+id/image_poster"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/vertical_margin"
-            android:layout_marginTop="@dimen/vertical_margin_double"
-            android:layout_marginEnd="@dimen/vertical_margin"
-            android:elevation="4dp"
-            app:layout_constraintDimensionRatio="2:3"
-            app:layout_constraintEnd_toEndOf="@id/dummy_backdrop_center"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/dummy_backdrop_center"
-            app:set_picture="@{movie.posterPath}" />
-
-        <TextView
-            android:id="@+id/text_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/vertical_margin"
-            android:layout_marginEnd="@dimen/vertical_margin"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:text="@{movie.title}"
-            android:textColor="@color/textColorWhite"
-            android:textSize="@dimen/text_header_6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/image_poster"
-            app:layout_constraintTop_toBottomOf="@+id/image_backdrop" />
-
-        <TextView
-            android:id="@+id/text_release_date"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_margin_half"
-            android:text="@{movie.releaseDate}"
-            android:textSize="@dimen/text_sub_header"
-            app:layout_constraintEnd_toEndOf="@id/text_title"
-            app:layout_constraintStart_toStartOf="@+id/text_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_title" />
-
-        <TextView
-            android:id="@+id/text_votes"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_sub_header"
-            app:layout_constraintEnd_toEndOf="@id/text_title"
-            app:layout_constraintStart_toStartOf="@id/text_title"
-            app:layout_constraintTop_toBottomOf="@+id/text_release_date"
-            app:vote_average="@{movie.voteAverage}"
-            app:vote_count="@{movie.voteCount}" />
-
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/barrier_header"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="text_votes,image_poster" />
+            android:layout_height="match_parent"
+            tools:context=".ui.moviedetails.MovieDetailActivity">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/app_bar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fitsSystemWindows="true"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:title="@{movie.title}" />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <ImageView
+                android:id="@+id/image_backdrop"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintDimensionRatio="16:9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
+                app:set_picture="@{movie.backdropPath}" />
 
 
-        <TextView
-            android:id="@+id/text_overview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/vertical_margin"
-            android:text="@{movie.overview}"
-            android:textSize="@dimen/text_sub_header"
-            app:layout_constraintEnd_toEndOf="@id/text_title"
-            app:layout_constraintStart_toStartOf="@+id/image_poster"
-            app:layout_constraintTop_toBottomOf="@+id/barrier_header" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Placeholder
+                android:id="@+id/dummy_backdrop_center"
+                android:layout_width="1dp"
+                android:layout_height="1dp"
+                app:layout_constraintBottom_toBottomOf="@id/image_backdrop"
+                app:layout_constraintEnd_toEndOf="@id/image_backdrop"
+                app:layout_constraintStart_toStartOf="@id/image_backdrop"
+                app:layout_constraintTop_toTopOf="@id/image_backdrop" />
+
+            <ImageView
+                android:id="@+id/image_poster"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/vertical_margin"
+                android:layout_marginTop="@dimen/vertical_margin_double"
+                android:layout_marginEnd="@dimen/vertical_margin_double"
+                android:elevation="4dp"
+                app:layout_constraintDimensionRatio="2:3"
+                app:layout_constraintEnd_toEndOf="@id/dummy_backdrop_center"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/dummy_backdrop_center"
+                app:set_picture="@{movie.posterPath}" />
+
+            <TextView
+                android:id="@+id/text_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/vertical_margin"
+                android:layout_marginEnd="@dimen/vertical_margin"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{movie.title}"
+                android:textColor="@color/textColorWhite"
+                android:textSize="@dimen/text_header_6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image_poster"
+                app:layout_constraintTop_toBottomOf="@+id/image_backdrop" />
+
+            <TextView
+                android:id="@+id/text_genre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin_half"
+                android:textSize="@dimen/text_sub_header"
+                app:layout_constraintEnd_toEndOf="@id/text_title"
+                app:layout_constraintStart_toStartOf="@+id/text_title"
+                app:layout_constraintTop_toBottomOf="@+id/text_title"
+                app:set_genre="@{movie.genres}" />
+
+            <TextView
+                android:id="@+id/text_release_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin_half"
+                android:text="@{movie.status +` on ` +movie.releaseDate}"
+                android:textSize="@dimen/text_sub_header"
+                app:layout_constraintEnd_toEndOf="@id/text_title"
+                app:layout_constraintStart_toStartOf="@+id/text_title"
+                app:layout_constraintTop_toBottomOf="@+id/text_genre" />
+
+            <TextView
+                android:id="@+id/text_votes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin_half"
+                android:textSize="@dimen/text_sub_header"
+                app:layout_constraintEnd_toEndOf="@id/text_title"
+                app:layout_constraintStart_toStartOf="@id/text_title"
+                app:layout_constraintTop_toBottomOf="@+id/text_release_date"
+                app:vote_average="@{movie.voteAverage}"
+                app:vote_count="@{movie.voteCount}" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="text_votes,image_poster" />
+
+            <TextView
+                android:id="@+id/text_tag_line"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:text="@{movie.tagLine}"
+                android:textSize="@dimen/text_header_6"
+                app:layout_constraintEnd_toEndOf="@id/text_title"
+                app:layout_constraintStart_toStartOf="@+id/image_poster"
+                app:layout_constraintTop_toBottomOf="@+id/barrier_header" />
+
+            <TextView
+                android:id="@+id/text_overview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:text="@{movie.overview}"
+                android:textSize="@dimen/text_body"
+                app:layout_constraintEnd_toEndOf="@id/text_title"
+                app:layout_constraintStart_toStartOf="@+id/image_poster"
+                app:layout_constraintTop_toBottomOf="@+id/text_tag_line" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

@@ -26,6 +26,9 @@ class MovieDetailActivity : BaseActivity() {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail)
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         val movieDao = MoviesDatabase.getInstance(application)!!.movieDao()
 
         viewModel = ViewModelProvider(
