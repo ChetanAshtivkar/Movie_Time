@@ -2,6 +2,7 @@ package com.chetan.movietime.ui.moviedetails
 
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.chetan.movietime.R
 import com.chetan.movietime.common.BaseActivity
@@ -13,7 +14,6 @@ import com.chetan.movietime.ui.mainscreen.BUNDLE_MOVIE
 
 class MovieDetailActivity : BaseActivity() {
     override fun setupLiveDataComponents() {
-
 
     }
 
@@ -31,8 +31,8 @@ class MovieDetailActivity : BaseActivity() {
         viewModel = ViewModelProvider(
             this,
             MovieDetailViewModelFactory(
-                application, MoviesRepository.getInstance(movieDao),
-                intent.extras
+                application,
+                MoviesRepository.getInstance(movieDao)
             )
         ).get(MovieDetailViewModel::class.java)
 
@@ -40,7 +40,13 @@ class MovieDetailActivity : BaseActivity() {
         binding.lifecycleOwner = this
 
         intent.extras?.let {
-            binding.movie = it.getSerializable(BUNDLE_MOVIE) as Movie?
+            val movie = it.getSerializable(BUNDLE_MOVIE) as Movie
+            binding.movie = movie
+
+            viewModel.getMovieById(movie.id)
+                .observe(this, Observer { movieDetailsFetchedFromTheServer ->
+                    binding.movie = movieDetailsFetchedFromTheServer
+                })
         }
     }
 }

@@ -1,12 +1,14 @@
 package com.chetan.movietime.data.network
 
 import com.chetan.movietime.data.APIResponse
+import com.chetan.movietime.data.Movie
 import com.chetan.movietime.data.network.RetrofitFactory.API_KEY
 import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
@@ -19,6 +21,11 @@ interface MovieService {
     fun getMovies(
         @Query("page") pageNumber: Int
     ): Call<APIResponse>
+
+    @GET("3/movie/{movieId}?api_key=$API_KEY&language=en-US")
+    fun getMovieById(
+        @Path("movieId") movieId: Int
+    ): Call<Movie>
 }
 
 object RetrofitFactory {

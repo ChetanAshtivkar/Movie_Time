@@ -1,6 +1,8 @@
 package com.chetan.movietime.data
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -10,6 +12,9 @@ import com.chetan.movietime.data.pagination.MovieDataSourceFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 /**
@@ -63,4 +68,18 @@ class MoviesRepository(val moviesDao: MoviesDao) {
     }
 
     fun getFavouriteMovies() = moviesDao.getAllFavourite()
+
+    fun getMovieDetails(movieId: Int): LiveData<Movie> {
+        val data = MutableLiveData<Movie>()
+        RetrofitFactory.makeRetrofitService().getMovieById(movieId)
+            .enqueue(object : Callback<Movie> {
+                override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                    data.value = response.body()
+                }
+
+                override fun onFailure(call: Call<Movie>, t: Throwable) {
+                }
+            })
+        return data
+    }
 }

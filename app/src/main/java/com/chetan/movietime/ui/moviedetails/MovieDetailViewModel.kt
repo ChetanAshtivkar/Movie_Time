@@ -11,9 +11,8 @@ import com.chetan.movietime.data.MoviesRepository
 
 class MovieDetailViewModel(
     val app: Application,
-    private val moviesRepository: MoviesRepository,
-    extra: Bundle?
-) :
-    BaseViewModel(app) {
+    private val moviesRepository: MoviesRepository
+) : BaseViewModel(app) {
 
+    fun getMovieById(id: Int) = moviesRepository.getMovieDetails(id)
 }
