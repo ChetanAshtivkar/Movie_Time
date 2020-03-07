@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
  */
 interface MovieService {
 
-    @GET("3/movie/popular?api_key=$API_KEY&language=en-US")
+    @GET("3/movie/top_rated?api_key=$API_KEY&language=en-US")
     fun getMovies(
         @Query("page") pageNumber: Int
     ): Call<APIResponse>

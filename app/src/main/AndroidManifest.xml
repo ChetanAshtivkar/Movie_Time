@@ -15,9 +15,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".ui.moviedetails.MovieDetailActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.mainscreen.MainActivity" />
+            
         </activity>
 
         <activity android:name=".ui.mainscreen.MainActivity">
