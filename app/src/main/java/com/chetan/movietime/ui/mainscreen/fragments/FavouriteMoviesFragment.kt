@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.chetan.movietime.R
 import com.chetan.movietime.data.MoviesRepository
 import com.chetan.movietime.data.database.MoviesDatabase
-import com.chetan.movietime.databinding.FragmentFavouriewMoviesBinding
+import com.chetan.movietime.databinding.FragmentFavouriteMoviesBinding
 import com.chetan.movietime.ui.mainscreen.MainViewModel
 import com.chetan.movietime.ui.mainscreen.MainViewModelFactory
 
@@ -33,8 +33,8 @@ class FavouriteMoviesFragment : Fragment() {
     ): View? {
         val movieDao = MoviesDatabase.getInstance(activity!!.application)!!.movieDao()
 
-        val binding = DataBindingUtil.inflate<FragmentFavouriewMoviesBinding>(
-            inflater, R.layout.fragment_favouriew_movies, container,
+        val binding = DataBindingUtil.inflate<FragmentFavouriteMoviesBinding>(
+            inflater, R.layout.fragment_favourite_movies, container,
             false
         )
 
